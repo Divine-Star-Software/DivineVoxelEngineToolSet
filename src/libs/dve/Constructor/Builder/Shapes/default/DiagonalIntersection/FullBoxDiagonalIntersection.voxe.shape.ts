@@ -1,0 +1,142 @@
+import type {
+ VoxelShapeAddData,
+ VoxelShapeInterface,
+} from "Meta/Constructor/VoxelShape.types";
+import { DVEB } from "../../../DivineVoxelEngineBuilder.js";
+
+const shapeDimensions = {
+ width: 0.5,
+ depth: 0.5,
+ height: 0.5,
+};
+
+const processFace = (face: "north" | "south", data: VoxelShapeAddData) => {
+ const uv = data.unTemplate[data.uvTemplateIndex];
+ const rotation = DVEB.shapeHelper.getTextureRotation(data.face, face);
+ const flip = DVEB.shapeHelper.shouldFaceFlip(data.face, face);
+ for (let i = 0; i < 2; i++) {
+  DVEB.uvHelper.addUVs(face, {
+   uvs: data.uvs,
+   uv: uv,
+   width: { start: 0, end: 1 },
+   height: { start: 0, end: 1 },
+   flipped: flip,
+   rotoate: rotation,
+  });
+  DVEB.uvHelper.processOverlayUVs(data);
+
+  DVEB.shapeHelper.calculateAOColorFromValue(
+   data.AOColors,
+   data.aoTemplate[data.aoIndex]
+  );
+
+  DVEB.shapeHelper.calculateLightColorFromValue(
+   data.RGBLightColors,
+   data.sunLightColors,
+   data.lightTemplate[data.lightIndex]
+  );
+ }
+
+ if (data.substance == "flora") {
+  let animData = DVEB.shapeHelper.meshFaceData.setAnimationType(1, 0);
+  DVEB.shapeHelper.addFaceData(animData, data.faceData);
+  DVEB.shapeHelper.addFaceData(animData, data.faceData);
+ } else {
+  DVEB.shapeHelper.addFaceData(0, data.faceData);
+  DVEB.shapeHelper.addFaceData(0, data.faceData);
+ }
+
+ data.uvTemplateIndex += 1;
+ data.overylayUVTemplateIndex += 4;
+ data.lightIndex += 1;
+ data.colorIndex += 1;
+ data.aoIndex += 1;
+};
+
+const transform1 = {
+ v1: { x: 0, y: 0, z: -1 },
+ v2: { x: 0, y: 0, z: 0 },
+ v3: { x: 0, y: 0, z: 0 },
+ v4: { x: 0, y: 0, z: -1 },
+};
+const transform2 = {
+ v1: { x: 0, y: 0, z: 1 },
+ v2: { x: 0, y: 0, z: 0 },
+ v3: { x: 0, y: 0, z: 0 },
+ v4: { x: 0, y: 0, z: 1 },
+};
+const faceFunctions: Record<number, (data: VoxelShapeAddData) => void> = {
+ 0: (data: VoxelShapeAddData) => {
+  DVEB.shapeBuilder.addFace(
+   "north",
+   data.position,
+   shapeDimensions,
+   data,
+   false,
+   transform1
+  );
+  DVEB.shapeBuilder.addFace(
+   "south",
+   data.position,
+   shapeDimensions,
+   data,
+   false,
+   transform2
+  );
+  processFace("north", data);
+ },
+
+ 1: (data: VoxelShapeAddData) => {
+  data.position.z -= 1;
+  DVEB.shapeBuilder.addFace(
+   "north",
+   data.position,
+   shapeDimensions,
+   data,
+   false,
+   transform2
+  );
+  data.position.z += 2;
+  DVEB.shapeBuilder.addFace(
+   "south",
+   data.position,
+   shapeDimensions,
+   data,
+   false,
+   transform1
+  );
+  processFace("north", data);
+ },
+};
+
+export const FullBoxDiagonalIntersection: VoxelShapeInterface = {
+ id: "FullBoxDiagonalIntersection",
+ cullFaceFunctions: {},
+ aoOverRideFunctions: {},
+ registerShapeForCullFaceOverRide(shapeId, func) {
+  this.cullFaceFunctions[shapeId] = func;
+ },
+ registerShapeAOAddOverRide(shapeId, func) {
+  this.aoOverRideFunctions[shapeId] = func;
+ },
+ cullFace(data) {
+  if (this.cullFaceFunctions[data.neighborVoxelShape.id]) {
+   return this.cullFaceFunctions[data.neighborVoxelShape.id](data);
+  }
+  return data.substanceResult;
+ },
+ aoOverRide(data) {
+  if (this.aoOverRideFunctions[data.neighborVoxelShape.id]) {
+   return this.aoOverRideFunctions[data.neighborVoxelShape.id](data);
+  }
+  return data.substanceResult;
+ },
+ addToChunkMesh(data: VoxelShapeAddData) {
+  data.position.x += shapeDimensions.width;
+  data.position.z += shapeDimensions.depth;
+  data.position.y += shapeDimensions.height;
+  faceFunctions[0](data);
+  faceFunctions[1](data);
+  return DVEB.shapeHelper.produceShapeReturnData(data);
+ },
+};

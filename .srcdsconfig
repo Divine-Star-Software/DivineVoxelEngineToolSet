@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "dir": "D:/DSSoftware/APPS/dve-toolset/compiled",
+      "fileExtensions": [
+        "js"
+      ],
+      "id": "dve"
+    }
+  ],
+  "outputs": [
+    {
+      "dir": "D:/DSSoftware/APPS/dve-toolset/electron/app/js",
+      "sourceID": "dve",
+      "codeSection": "all",
+      "keepComments": true
+    }
+  ],
+  "codeSections": {
+    "all": {
+      "start": "@ds",
+      "end": "@ds"
+    }
+  }
+}

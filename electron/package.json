@@ -1,0 +1,22 @@
+{
+  "name": "divine-voxel-engine-test-worlds",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./electronstart/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@types/ws": "^8.5.3",
+    "babylonjs": "^5.8.2",
+    "electron": "^19.0.8"
+  },
+  "dependencies": {
+    "ds-element-tree": "0.0.7",
+    "ws": "^8.8.0"
+  }
+}

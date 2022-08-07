@@ -1,0 +1,216 @@
+body {
+  font-family: "Lucida Console";
+  background: rgba(0, 0, 0, 0);
+  --main: rgba(162, 5, 224, 0.925);
+  --main-dark: rgba(92, 1, 128, 0.925);
+  --font-color: cyan;
+  --font-fmaily: "Lucida Console";
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.main {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin: 0px;
+  padding: 0px;
+}
+.ds-logo-container {
+  margin: auto;
+}
+
+.screen {
+  height: 100%;
+  width: 100%;
+}
+.screen.inactive {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+  animation: fadein .5s linear;
+}
+
+.subscreen {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100%;
+}
+.subscreen.inactive {
+  display: none;
+}
+
+.subscreen.active {
+  display: block;
+  animation: fadein .5s linear;
+}
+
+.ds-logo svg {
+  fill: rgba(162, 5, 224, 0.925);
+  animation: spin 8s linear infinite;
+  text-align: center;
+  position: relative;
+  left: calc(50% - 75px);
+}
+
+.ds-title {
+  text-align: center;
+  color: var(--main);
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(95, 0, 133, 0.925);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(162, 5, 224, 0.925);
+  border: 3px solid rgba(191, 30, 255, 0.925);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate3d(0, -1, 0, 0deg);
+  }
+  100% {
+    transform: rotate3d(0, -1, 0, 360deg);
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.form-group {
+  display: flex;
+  color: cyan;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+form {
+  margin: auto;
+  display: block;
+}
+.update-form {
+  display: block;
+}
+form label {
+  color: cyan;
+  margin-right: 10px;
+  margin-left: auto;
+}
+form input {
+  color: cyan;
+  display: block;
+  border: 1px solid var(--main);
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-right: auto;
+}
+form button {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: cyan;
+  display: block;
+  border: 1px solid var(--main);
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+form button:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: var(--main);
+  transition: 0.5s;
+}
+form textarea.data-display {
+  width: 90%;
+  margin-left: 5%;
+}
+form textarea {
+  color: cyan;
+  border: 1px solid var(--main);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.form-text {
+  text-align: center;
+  color: cyan;
+}
+
+.form-title {
+  text-align: center;
+  color: cyan;
+}
+.form-optin-group {
+  border: 1px solid var(--main);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 800px;
+  min-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-option {
+  border: 1px solid var(--main);
+  color: cyan;
+  transition: 0.5s;
+  text-align: center;
+  padding: 0;
+}
+.form-option:hover {
+  background-color: var(--main);
+  color: black;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.form-option.active {
+  background-color: var(--main);
+  color: black;
+  transition: 0.5s;
+}
+[type="file"] {
+  display: none;
+}
+.image-display {
+  width: 110px;
+  height: 110px;
+  background-color: var(--main);
+  border-radius: 10px;
+  margin: auto;
+  padding: 10px;
+}
+
+.pixel-image-display {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  display: block;
+}
+
+.color-display {
+  border: 1px solid var(--main);
+  padding: 5px;
+  width: 100px;
+  height: 10px;
+  margin: auto;
+}

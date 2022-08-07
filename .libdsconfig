@@ -1,0 +1,38 @@
+{
+  "sources": [
+    {
+      "dir": "D:/DSSoftware/APPS/divinevoxelengine/src",
+      "fileExtensions": [
+        "ts"
+      ],
+      "id": "dve"
+    },
+    {
+      "dir": "D:/DSSoftware/DSLIBS/elementTree/src",
+      "fileExtensions": [
+        "ts"
+      ],
+      "id": "et"
+    }
+  ],
+  "outputs": [
+    {
+      "dir": "D:/DSSoftware/APPS/dve-toolset/src/libs/dve",
+      "sourceID": "dve",
+      "codeSection": "all",
+      "keepComments": true
+    },
+    {
+      "dir": "D:/DSSoftware/APPS/dve-toolset/src/libs/et",
+      "sourceID": "et",
+      "codeSection": "all",
+      "keepComments": true
+    }
+  ],
+  "codeSections": {
+    "all": {
+      "start": "@ds",
+      "end": "@ds"
+    }
+  }
+}
