@@ -33,8 +33,7 @@ export const TTMConvertForDVE = (): ElementTreeData => {
     form([
       formTitle("Convert For DVE"),
       dataInput(inputBind, "raw"),
-      formButton("Covnert", async (event: MouseEvent) => {
-        event.preventDefault();
+      formButton("Covnert", async () => {
         try {
           const data = JSON.parse(inputBind.raw);
           inputBind.result = TextureProcessor.convertToFlatData(data);

@@ -16,8 +16,7 @@ export const TTMConvertForDVE = () => {
     return SubScreen("ttm-1", true, form([
         formTitle("Convert For DVE"),
         dataInput(inputBind, "raw"),
-        formButton("Covnert", async (event) => {
-            event.preventDefault();
+        formButton("Covnert", async () => {
             try {
                 const data = JSON.parse(inputBind.raw);
                 inputBind.result = TextureProcessor.convertToFlatData(data);
