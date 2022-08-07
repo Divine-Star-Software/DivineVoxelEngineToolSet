@@ -109,5 +109,5 @@ export const DVEW = {
 };
 DVEW.environment = Util.getEnviorment();
 DVEW.voxelManager.onRegister((voxel) => {
-    DVEW.worldGeneration.voxelPalette.registerVoxelForGlobalPalette(voxel);
+    DVEW.worldGeneration.voxelPalette.registerVoxel(voxel);
 });

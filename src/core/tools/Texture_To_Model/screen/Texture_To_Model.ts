@@ -36,7 +36,6 @@ export const TextureToModelScreen = (): ElementTreeData => {
     form([
       formTitle("Texture To Model"),
       fileInput("texture", inputBind, "file", (file) => {
-        console.log(file, image);
         if (image.img) {
           image.img.src = file;
         }
@@ -64,8 +63,7 @@ export const TextureToModelScreen = (): ElementTreeData => {
           formStates.mode = Number(value);
         }
       ),
-      formButton("Generate", async (event: MouseEvent) => {
-        event.preventDefault();
+      formButton("Generate", async () => {
         if (inputBind.file == "") {
           alert("Must select a file");
         }
